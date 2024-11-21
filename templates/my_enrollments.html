@@ -1,0 +1,26 @@
+<!-- templates/my_enrollments.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="mb-4">My Enrollments</h2>
+  {% if enrollments %}
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Degree Name</th>
+          <th>Enrolled On</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enrollment in enrollments %}
+          <tr>
+            <td>{{ enrollment.degree.degree_name }}</td>
+            <td>{{ enrollment.enrolled_on.strftime('%Y-%m-%d') }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You have not enrolled in any degrees yet.</p>
+  {% endif %}
+  <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,80 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }} - Student Enrollment System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GmPQ/jICZxY/qZ4hgZYpGXBpOPGvl7QR/gqcgqE1Ghw/pJ61hf07kpHFrl23tmKb" crossorigin="anonymous">
+    <!-- Font Awesome Icons (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pV3I8+b9+Y/jnnP7IjnFb90+slS45k0e+YkXG+CT4gXY9HF4HHS5YnF0DZR8XbV7ZvwlMkaXyNcdXO4mUf8EAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <!-- Inside <head> tag of base.html -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('main.index') }}"><i class="fas fa-graduation-cap"></i> Student Enrollment</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.index') }}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link disabled">Hello, {{ current_user.username }}!</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.my_enrollments') }}"><i class="fas fa-bookmark"></i> My Enrollments</a>
+                </li>
+                {% if current_user.is_admin() %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.admin_degrees') }}"><i class="fas fa-tools"></i> Admin Dashboard</a>
+                  </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.register') }}"><i class="fas fa-user-plus"></i> Register</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+
+    <!-- Main Content Container -->
+    <div class="container mt-4">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+              <div>{{ message }}</div>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 p-4 text-center">
+      &copy; {{ current_year }} Student Enrollment System. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap JS and dependencies (Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-d+gX2sePxZkSVJz+0KfBqU2uQ7w3Y8hBrm7QXY4j7w/1D5Oofwrp1rGpG/mWQleI" crossorigin="anonymous"></script>
+  </body>
+</html>

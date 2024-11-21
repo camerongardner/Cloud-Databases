@@ -1,0 +1,33 @@
+<!-- templates/admin_degrees.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="mb-4">Manage Degrees</h2>
+  <a href="{{ url_for('main.create_degree') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Create New Degree</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Degree Name</th>
+        <th>Description</th>
+        <th>Duration</th>
+        <th>Requirements</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for degree in degrees %}
+        <tr>
+          <td>{{ degree.degree_name }}</td>
+          <td>{{ degree.description }}</td>
+          <td>{{ degree.duration }}</td>
+          <td>{{ degree.requirements }}</td>
+          <td>
+            <a href="{{ url_for('main.edit_degree', degree_id=degree.id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
+            <form action="{{ url_for('main.delete_degree', degree_id=degree.id) }}" method="post" style="display:inline;">
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this degree?');"><i class="fas fa-trash-alt"></i> Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

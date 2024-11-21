@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="mb-4">Available Degrees</h1>
+  <div class="row">
+    {% for degree in degrees %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ degree.degree_name }}</h5>
+            <p class="card-text">{{ degree.description }}</p>
+            <p class="card-text"><strong>Duration:</strong> {{ degree.duration }}</p>
+            <p class="card-text"><strong>Requirements:</strong> {{ degree.requirements }}</p>
+          </div>
+          <div class="card-footer">
+            {% if current_user.is_authenticated %}
+              <a href="{{ url_for('main.enroll', degree_id=degree.id) }}" class="btn btn-primary">Enroll</a>
+            {% else %}
+              <a href="{{ url_for('main.login') }}" class="btn btn-secondary">Login to Enroll</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
