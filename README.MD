@@ -152,10 +152,11 @@ student-enrollment-system/
 - Deploy the application to a cloud server.
 - Allow users to unenroll from a degree.
 - Configure notifications to users based on when the degree is to start and other information.
+- Implement error handling so the application does not crash if a user tries to register an account with an email that has already been used.
 
 ## Demonstration Video
 
-You can watch a walkthrough of the application on YouTube: [Student Enrollment System Walkthrough](https://www.youtube.com/your-video-link-here)
+You can watch a walkthrough of the application on YouTube: [Student Enrollment System Walkthrough](https://www.youtube.com/watch?v=q-s0SMba91U)
 
 ## Contributing
 
