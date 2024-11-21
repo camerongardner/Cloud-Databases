@@ -1,5 +1,8 @@
-Flask 
-Flask-Login 
-Flask-SQLAlchemy 
-pymysql
-python-dotenv
+Flask==2.2.0 
+Flask-Login==0.6.2 
+Flask-SQLAlchemy==3.0.2
+Flask-wtf==1.1.1 
+pymysql==1.1.1
+python-dotenv==1.0.0
+werkzeug==2.2.3
+click==8.1.7
